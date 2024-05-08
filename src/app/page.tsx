@@ -1,11 +1,10 @@
-import { db } from "~/server/db";
-export const dynamic = "force-dynamic";
 import "@uploadthing/react/styles.css";
-import { UploadButton } from "@uploadthing/react";
 import { getMyImages } from "~/server/queries";
 import { SignedIn } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
+
+export const dynamic = "force-dynamic";
 
 async function Images() {
     const images = await getMyImages();
