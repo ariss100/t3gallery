@@ -5,6 +5,7 @@ import { images } from "./db/schema";
 import { and, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { redirect } from 'next/navigation'
+import analyticsServerClient from "./analytics";
 
 export async function getMyImages() {
 
@@ -35,14 +36,20 @@ export async function getImage(id: string) {
 
 export async function deleteImage(id: number) {
   const user = auth();
-
+  const idToString = id.toString();
   if (!user.userId) throw new Error("Unauthorized");
 
 const image = await db.query.images.findFirst({
-    where: (model, {eq}) => eq(model.id, id),
+    where: (model, {eq}) => eq(model.id, idToString),
   });
   await db.delete(images).where(and (eq(images.id, id), eq(images.userId, user.userId)) );
 
-  revalidatePath("/");
+  analyticsServerClient.capture({
+    distinctId: user.userId,
+    event: "deleted image",
+    properties: {
+      imageId: id,
+    }
+  });
   redirect("/");
 }
