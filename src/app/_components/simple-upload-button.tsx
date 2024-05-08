@@ -50,10 +50,46 @@ function SvgUploadButton() {
     );
 }
 
+function LoadingSpinner() {
+    return (
+        <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <circle className="spinner_nOfF" cx="4" cy="12" r="3" />
+            <circle
+                className="spinner_nOfF spinner_fVhf"
+                cx="4"
+                cy="12"
+                r="3"
+            />
+            <circle
+                className="spinner_nOfF spinner_piVe"
+                cx="4"
+                cy="12"
+                r="3"
+            />
+            <circle
+                className="spinner_nOfF spinner_MSNs"
+                cx="4"
+                cy="12"
+                r="3"
+            />
+        </svg>
+    );
+}
+
 export function SimpleUploadButton() {
     const { inputProps } = useUploadThingInputProps("imageUploader", {
         onUploadBegin() {
-            toast("Uploading...");
+            toast(
+                <div className="flex gap-2">
+                    <LoadingSpinner />
+                    Uploading...
+                </div>,
+            );
         },
         onClientUploadComplete: () => {
             router.refresh();
