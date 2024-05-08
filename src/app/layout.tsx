@@ -3,6 +3,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Inter } from "next/font/google";
 import { TopNav } from "~/app/_components/topnav";
 import { Toaster } from "sonner";
+import { CSPostHogProvider } from "./_analytics/provider";
 const inter = Inter({
     subsets: ["latin"],
     variable: "--font-sans",
@@ -23,17 +24,19 @@ export default function RootLayout({
 }) {
     return (
         <ClerkProvider>
-            <html lang="en">
-                <body
-                    className={`font-sans ${inter.variable} flex flex-col gap-4`}
-                >
-                    <TopNav />
-                    {children}
-                    {modal}
-                    <div id="modal-root"></div>
-                    <Toaster />
-                </body>
-            </html>
+            <CSPostHogProvider>
+                <html lang="en">
+                    <body
+                        className={`font-sans ${inter.variable} flex flex-col gap-4`}
+                    >
+                        <TopNav />
+                        {children}
+                        {modal}
+                        <div id="modal-root"></div>
+                        <Toaster />
+                    </body>
+                </html>
+            </CSPostHogProvider>
         </ClerkProvider>
     );
 }
