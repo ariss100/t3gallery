@@ -9,20 +9,30 @@ export const dynamic = "force-dynamic";
 async function Images() {
     const images = await getMyImages();
     return (
-        <div className="flex flex-wrap justify-center gap-4">
+        <div
+            style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fill, minmax(400px, 1fr))",
+                gap: "1rem",
+            }}
+        >
             {images.map((image) => (
-                <div key={image.id} className="flex h-48 w-48 flex-col">
-                    <Link href={`/img/${image.id}`}>
+                <Link href={`/img/${image.id}`}>
+                    <div
+                        style={{
+                            position: "relative",
+                            height: "400px",
+                            overflow: "hidden",
+                        }}
+                    >
                         <Image
                             src={image.url}
                             alt={image.name}
+                            fill
                             style={{ objectFit: "cover" }}
-                            width={480}
-                            height={480}
                         />
-                    </Link>
-                    <p>{image.id}</p>
-                </div>
+                    </div>
+                </Link>
             ))}
         </div>
     );
