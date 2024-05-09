@@ -96,6 +96,10 @@ export function SimpleUploadButton() {
                 </div>,
             );
         },
+        onUploadError(error) {
+            console.error(error);
+            toast.error("Upload failed");
+        },
         onClientUploadComplete: () => {
             posthog.capture("upload-begin");
 
