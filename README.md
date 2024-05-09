@@ -7,8 +7,15 @@
 - [x] Actually set up a db (vercel postgres)
 - [x] Attach database to UI
 - [x] Add auth (w/ clerk)
-- [ ] Add image upload
-- [ ] Routeing/image page (parallel route)
-- [ ] Delete button (w/ server actions)
-- [ ] Analytics (posthog)
-- [ ] Ratelimiting (upstash)
+- [x] Add image upload
+- [x] Routeing/image page (parallel route)
+- [x] Delete button (w/ server actions)
+- [x] Analytics (posthog)
+- [x] Ratelimiting (upstash)
+
+## Extras
+
+- [ ] Fix the page layout for images of diff resolutions
+- [ ] Selecting images (zustand) with multiple actions
+- [ ] Infinite scroll
+- [ ] Folders / Albums
